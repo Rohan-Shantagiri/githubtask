@@ -1,0 +1,108 @@
+<!--navigation bar -->
+<nav id="mainnav" class="navbar navbar-expand-md navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" style="float:inline-start;" data-toggle="collapse"
+    data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <img src="../assets/logo.png" height="30px" width="30px">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline" action="/action_page.php">
+      <input class="form-control mr-sm-2" id="repsearch" type="text" placeholder="Search or jump to">
+    </form>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#"> Pull Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> Issues</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> Marketplace</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> Explore</a>
+      </li>
+    </ul>
+  </div>
+  <i class="fa fa-bell" id="bell" aria-hidden="true"></i>
+  <i class="fa fa-plus" id="plus" aria-hidden="true"></i>
+  <img src="../assets/usericon.png" id="user" height="30px" width="30px">
+  <i class="fa fa-caret-down" id="down" aria-hidden="true"></i>
+</nav>
+<div style="height: 30px;"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4" align="center">
+      <div *ngFor="let u of user">
+        <img id="profile" src="{{u.avatar_url}}" height="300px" width="300px">
+      </div>
+      <div  *ngFor="let u of user">
+        <h3 id="username">{{ u.login }}</h3>
+      </div>
+      <button type="button" id="button" class="btn btn-light">Edit Profile</button>
+    </div>
+
+    <div class="col-sm-8">
+      <nav class="navbar navbar-expand-sm bg-light navbar-light" id="#subnav" style="background-color: white!important;">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" id="m1" href="#">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"id="m2" href="#">Repositories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="m3" href="#">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="m4" href="#">Packages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="m5" href="#">Stars</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="m6" href="#">Followers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="m7" href="#">Following</a>
+          </li>
+        </ul>
+      </nav>
+      <div style="display: flex;">
+        <div class="form-group">
+          <input type="text" [(ngModel)]="nameSearch" class="form-control" id="repsearch" placeholder="Find a repository...">
+        </div>
+        <div class="dropdown">
+          <select type="button" class="btn btn-light dropdown-toggle" style="margin-left: 5px;" data-toggle="dropdown">
+            Type
+          <div class="dropdown-menu">
+            <h5 class="dropdown-header">Select type</h5>
+            <option><a class="dropdown-item" href="#">All</a></option>
+            <option><a class="dropdown-item" href="#">Private</a></option>
+            <option><a class="dropdown-item" href="#">Public</a></option>
+            <option><a class="dropdown-item" href="#">Sources</a></option>
+            <option><a class="dropdown-item" href="#">Forks</a></option>
+            <option><a class="dropdown-item" href="#">Archived</a></option>
+          </div>
+        </select>
+        </div>
+        <div class="form-group" >
+          <select  class="form-control" style="margin-left: 5px;" >
+            Language
+            <h5 class="dropdown-header">Select Language</h5>
+            <option value="0">All</option>
+            <option *ngFor="let r of repo" value={{r.language}}>{{r.language}}</option>
+        </select>
+        </div>
+        <button type="button" style="margin-left: 5px;" class="btn btn-success">New</button>
+      </div>
+      <hr>
+      <div>
+        <div *ngFor="let r of repo ">
+          <app-repopanel [repo]="r"></app-repopanel>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

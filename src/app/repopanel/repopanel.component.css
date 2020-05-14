@@ -1,0 +1,15 @@
+#name{
+    color: rgb(21, 101, 128);
+}
+#descr{
+    font-size: 15px;
+    color: rgb(110, 102, 102);
+}
+.container{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+#star{
+    margin: 5px;
+    color: gold;
+}
