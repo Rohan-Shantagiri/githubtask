@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   user: any[] ;
   repo: any[] ;
   search;
-  term: any;
-  nameSearch: string ='';
+  term;
+  
  ngOnInit(){
    this.getUser();
    this.getRepo();
@@ -37,6 +37,9 @@ export class AppComponent implements OnInit {
    )
  }
 
+ onChange(event:any){
+   this.repo = this.repo.filter(repo => repo.language === event);
+ }
  getRepo(){
    this.git.getRepos().subscribe(
      (result:any) =>{

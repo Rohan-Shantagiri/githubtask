@@ -71,35 +71,31 @@
       </nav>
       <div style="display: flex;">
         <div class="form-group">
-          <input type="text" [(ngModel)]="nameSearch" class="form-control" id="repsearch" placeholder="Find a repository...">
+          <input type="text" [(ngModel)]="term" class="form-control" id="repsearch" placeholder="Find a repository...">
         </div>
-        <div class="dropdown">
-          <select type="button" class="btn btn-light dropdown-toggle" style="margin-left: 5px;" data-toggle="dropdown">
-            Type
-          <div class="dropdown-menu">
-            <h5 class="dropdown-header">Select type</h5>
-            <option><a class="dropdown-item" href="#">All</a></option>
-            <option><a class="dropdown-item" href="#">Private</a></option>
-            <option><a class="dropdown-item" href="#">Public</a></option>
-            <option><a class="dropdown-item" href="#">Sources</a></option>
-            <option><a class="dropdown-item" href="#">Forks</a></option>
-            <option><a class="dropdown-item" href="#">Archived</a></option>
-          </div>
+        <div class="form-group">
+          <select  class="form-control"  style="margin-left: 5px;" >
+            <option value="All">All</option>
+            <option value="private">Private</option>
+            <option value="public">Public</option>
+            <option value="sources">Sources</option>
+            <option value="forks">Forks</option>
+            <option value="archived">Archived</option>
         </select>
         </div>
         <div class="form-group" >
           <select  class="form-control" style="margin-left: 5px;" >
             Language
-            <h5 class="dropdown-header">Select Language</h5>
+            <h5 class="dropdown-header" (change)="onChange($event)">Select Language</h5>
             <option value="0">All</option>
-            <option *ngFor="let r of repo" value={{r.language}}>{{r.language}}</option>
+            <option *ngFor="let r of repo " value={{r.language}}>{{r.language}}</option>
         </select>
         </div>
         <button type="button" style="margin-left: 5px;" class="btn btn-success">New</button>
       </div>
       <hr>
       <div>
-        <div *ngFor="let r of repo ">
+        <div *ngFor="let r of repo | filter:term ">
           <app-repopanel [repo]="r"></app-repopanel>
         </div>
       </div>
