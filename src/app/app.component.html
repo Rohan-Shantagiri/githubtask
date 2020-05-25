@@ -37,20 +37,21 @@
       <div *ngFor="let u of user">
         <img id="profile" src="{{u.avatar_url}}" height="300px" width="300px">
       </div>
-      <div  *ngFor="let u of user">
+      <div *ngFor="let u of user">
         <h3 id="username">{{ u.login }}</h3>
       </div>
       <button type="button" id="button" class="btn btn-light">Edit Profile</button>
     </div>
 
     <div class="col-sm-8">
-      <nav class="navbar navbar-expand-sm bg-light navbar-light" id="#subnav" style="background-color: white!important;">
+      <nav class="navbar navbar-expand-sm bg-light navbar-light" id="#subnav"
+        style="background-color: white!important;">
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link" id="m1" href="#">Overview</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active"id="m2" href="#">Repositories</a>
+            <a class="nav-link active" id="m2" href="#">Repositories</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="m3" href="#">Projects</a>
@@ -74,29 +75,28 @@
           <input type="text" [(ngModel)]="term" class="form-control" id="repsearch" placeholder="Find a repository...">
         </div>
         <div class="form-group">
-          <select  class="form-control"  style="margin-left: 5px;" >
+          <select class="form-control" [(ngModel)]="search_type" name="search_type" style="margin-left: 5px;">
             <option value="All">All</option>
             <option value="private">Private</option>
             <option value="public">Public</option>
             <option value="sources">Sources</option>
             <option value="forks">Forks</option>
             <option value="archived">Archived</option>
-        </select>
+          </select>
         </div>
-        <div class="form-group" >
-          <select  class="form-control" style="margin-left: 5px;" >
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="search_language" name="search_language" style="margin-left: 5px;">
             Language
-            <h5 class="dropdown-header" (change)="onChange($event)">Select Language</h5>
-            <option value="0">All</option>
-            <option *ngFor="let r of repo " value={{r.language}}>{{r.language}}</option>
-        </select>
+            <option value="All">All</option>
+            <option *ngFor="let r of repos " value={{r.language}}>{{r.language}}</option>
+          </select>
         </div>
         <button type="button" style="margin-left: 5px;" class="btn btn-success">New</button>
       </div>
       <hr>
       <div>
-        <div *ngFor="let r of repo | filter:term ">
-          <app-repopanel [repo]="r"></app-repopanel>
+        <div *ngFor="let r of repos">
+          <app-repopanel [repo]="r | repoFilter:term:search_type:search_language"></app-repopanel>
         </div>
       </div>
     </div>

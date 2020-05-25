@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RepopanelComponent implements OnInit {
 
-  @Input('repo') repo;
+  @Input() repo;
 
   constructor() { }
 

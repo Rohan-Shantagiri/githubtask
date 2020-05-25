@@ -11,45 +11,86 @@ import { map } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'githubtask';
 
-  constructor(private git:GitService) {
+  constructor(private git: GitService) {
   }
-  
-  user: any[] ;
-  repo: any[] ;
+
+  user: any[] = [
+    {
+      avatar_url: "assets/logo.png",
+      login: "Venkatesh Mogili"
+    }
+  ];
+   repos: any[] // = [
+  //   {
+  //     name: "Example",
+  //     private: true,
+  //     fork: false,
+  //     archived: false,
+  //     language: "JavaScript",
+  //     description: "This is sample project"
+  //   },
+  //   {
+  //     name: "ckeditor",
+  //     private: false,
+  //     fork: false,
+  //     archived: false,
+  //     language: "Typescript",
+  //     description: "This is sample project"
+  //   },
+  //   {
+  //     name: "another repository",
+  //     private: false,
+  //     fork: true,
+  //     archived: false,
+  //     language: "Typescript",
+  //     description: "This is sample project"
+  //   },
+  //   {
+  //     name: "one more repo",
+  //     private: false,
+  //     fork: false,
+  //     archived: true,
+  //     language: "JavaScript",
+  //     description: "This is sample project"
+  //   }
+  // ];
   search;
-  term;
-  
- ngOnInit(){
-   this.getUser();
-   this.getRepo();
- }
+  term: any = '';
+  search_type: any = '';
+  search_language: any = '';
 
- getUser(){
-   this.git.getProfile().subscribe(
-     result => {
-       this.user = result;
-       this.user= Array.of(this.user);
-       console.log(result);
-     },
-     error => {
-      console.log(error)
-    }
-   )
- }
+  ngOnInit() {
+    this.getUser();
+    this.getRepo();
+  }
 
- onChange(event:any){
-   this.repo = this.repo.filter(repo => repo.language === event);
- }
- getRepo(){
-   this.git.getRepos().subscribe(
-     (result:any) =>{
-       this.repo = result;
-       console.log(result);
-     },
-     error => {
-      console.log(error)
-    }
-   )
- }
+  getUser() {
+    this.git.getProfile().subscribe(
+      result => {
+        this.user = result;
+        this.user = Array.of(this.user);
+        // console.log(result);
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  getRepo() {
+    this.git.getRepos().subscribe(
+      (result: any) => {
+        this.repos = result;
+        // console.log(result);
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  // ngOnchanges(){
+  //   this.repos = this.repos.filter(lang => lang.language = this.repos)
+  // }
 
 }
